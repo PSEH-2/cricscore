@@ -1,5 +1,6 @@
 package com.cric.score;
 
+import com.cric.EntityNotFound;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -21,7 +22,7 @@ public class CricAPIService {
     public static final String API_KEY = "WmPJrX2s3KMyZVPFwlm1vxXLXKw1";
     JSONParser jsonParser = new JSONParser();
 
-    public CricAPIResponse processUniqueId(Integer uniqueId){
+    public CricAPIResponse processUniqueId(Integer uniqueId) throws EntityNotFound{
         CricAPIResponse result = null;
         try {
             JSONObject output = getOutput(uniqueId);
@@ -53,14 +54,14 @@ public class CricAPIService {
         return result;
     }
 
-    public JSONObject getOutput(Integer uniqueId) throws ParseException {
+    public JSONObject getOutput(Integer uniqueId) throws ParseException,EntityNotFound {
         Client client = Client.create();
         WebResource webResource = client.resource(String.format(CRIC_API,uniqueId));
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON)
                 .header(API_HEADER,API_KEY)
                 .get(ClientResponse.class);
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            throw new EntityNotFound("Failed : HTTP error code : " + response.getStatus());
         }
         String output = response.getEntity(String.class);
         JSONObject result = (JSONObject) jsonParser.parse(output);
