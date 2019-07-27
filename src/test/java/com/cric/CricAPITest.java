@@ -31,10 +31,6 @@ public class CricAPITest {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    @After
-    public void close() {
-        ;
-    }
 
     @Test
     public void getCricScore() throws Exception {
@@ -65,8 +61,5 @@ public class CricAPITest {
         int status = mvcResult.getResponse().getStatus();
         assertEquals(400, status);
     }
-
-
-
 
 }

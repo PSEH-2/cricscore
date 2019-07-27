@@ -17,10 +17,10 @@ import java.util.regex.Pattern;
 @Service
 public class CricAPIService {
 
-    public static final String CRIC_API = "http://cricapi.com/api/cricketScore?unique_id=%s";
-    public static final String API_HEADER = "apikey";
-    public static final String API_KEY = "WmPJrX2s3KMyZVPFwlm1vxXLXKw1";
-    JSONParser jsonParser = new JSONParser();
+    private static final String CRIC_API = "http://cricapi.com/api/cricketScore?unique_id=%s";
+    private static final String API_HEADER = "apikey";
+    private static final String API_KEY = "WmPJrX2s3KMyZVPFwlm1vxXLXKw1";
+    private JSONParser jsonParser = new JSONParser();
 
     public CricAPIResponse processUniqueId(Integer uniqueId) throws EntityNotFound{
         CricAPIResponse result = null;
@@ -57,7 +57,7 @@ public class CricAPIService {
         return result;
     }
 
-    public JSONObject getOutput(Integer uniqueId) throws ParseException,EntityNotFound {
+    private JSONObject getOutput(Integer uniqueId) throws ParseException,EntityNotFound {
         Client client = Client.create();
         WebResource webResource = client.resource(String.format(CRIC_API,uniqueId));
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON)
