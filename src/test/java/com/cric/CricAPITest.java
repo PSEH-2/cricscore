@@ -50,6 +50,17 @@ public class CricAPITest {
         assertEquals(400, status);
     }
 
+    @Test
+    public void getCricScoreIncorrect() throws Exception {
+        String uri = "/score/11928411";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(400, status);
+    }
+
+
 
 
 }
