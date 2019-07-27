@@ -50,7 +50,7 @@ public class CricAPIService {
             result.setScore(score);
             String[] rotations = score.split("/");
             String rotation = rotations[1] + rotations[0]+"/";
-            result.setStat(rotation);
+            result.setRotation(rotation);
         } catch (ParseException e) {
             e.printStackTrace();
         }
