@@ -32,7 +32,10 @@ public class CricAPIService {
             String team2 = (String) output.get("team-2");
             String stat = (String) output.get("stat");
             String pattern = null;
-            if (stat.startsWith(team1.substring(0,team1.indexOf(" ")))){
+            String compareTeam = null;
+            if(team1.contains(" ")) compareTeam = team1.substring(0,team1.indexOf(" "));
+            else compareTeam = team1;
+            if (stat.startsWith(compareTeam)){
                 pattern = team1 + "\\s(\\d+.\\d)";
                 team1 = team1 + "(winner)";
             } else{
