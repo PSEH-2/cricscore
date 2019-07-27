@@ -2,20 +2,11 @@ package com.cric.score;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Date;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder
 public class CricAPIResponse {
-
-    private int status;
-
-    @JsonProperty("Round rotation")
-    private String stat;
-
-    @JsonProperty("Winning team’s score:")
-    private String score;
 
     @JsonProperty("Team-1")
     private String team1;
@@ -23,12 +14,18 @@ public class CricAPIResponse {
     @JsonProperty("Team-2")
     private String team2;
 
-    public String getStat() {
-        return stat;
+    @JsonProperty("Winning team’s score:")
+    private String score;
+
+    @JsonProperty("Round rotation")
+    private String rotation;
+
+    public String getRotation() {
+        return rotation;
     }
 
-    public void setStat(String stat) {
-        this.stat = stat;
+    public void setRotation(String rotation) {
+        this.rotation = rotation;
     }
 
     public String getScore() {
@@ -58,19 +55,10 @@ public class CricAPIResponse {
     @Override
     public String toString() {
         return "CricAPIResponse{" +
-                "stat='" + stat + '\'' +
+                "rotation='" + rotation + '\'' +
                 ", score='" + score + '\'' +
                 ", team1='" + team1 + '\'' +
                 ", team2='" + team2 + '\'' +
                 '}';
     }
-
-    public CricAPIResponse(String stat, String score, String team1, String team2) {
-        this.stat = stat;
-        this.score = score;
-        this.team1 = team1;
-        this.team2 = team2;
-    }
-
-    public CricAPIResponse(){}
 }
