@@ -1,5 +1,6 @@
 package com.cric;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,11 @@ public class CricAPITest {
     @Before
     public void setUp() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    @After
+    public void close() {
+        ;
     }
 
     @Test
